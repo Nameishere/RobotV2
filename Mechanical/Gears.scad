@@ -4,7 +4,7 @@ radius = 3;
 
 Width = 2.5;
 
-// 1.10 is the size to friction fit to the F130 DC motor (2mm shaft)
+// 1.05 is the size to friction fit to the F130 DC motor (2mm shaft)
 boreRadius = 1.10;
 
 module gear(width, bore, radius){

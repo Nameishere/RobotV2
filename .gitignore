@@ -1,2 +1,10 @@
 *.STL
 *.3mf
+*.kicad_prl
+Electrical/Electrical-backups/*
+
+fp-info-cache
+
+*.lck
+
+\#auto_saved_files#
