@@ -95,7 +95,7 @@ module knob() {
     }
 }
 
-module Ky040Mount(showpins = true) {
+module Ky040Mount(showpin = true, showMount = false) {
     // PCB dimensions
     pcb_width = 26.5;
     pcb_depth = 19;
@@ -115,6 +115,16 @@ module Ky040Mount(showpins = true) {
     // Mounting hole positions
     hole_offset_x = 4.5;
     hole_offset_y = 16.5;
+    
+    if (showpin){
+        pin();
+    }
+    
+        if (showMount){
+        mount();
+    }
+    
+    module mount(){
     difference() {
     difference() {
         union() {
@@ -169,12 +179,11 @@ module Ky040Mount(showpins = true) {
     cube([pcb_width,pcb_depth + 1,pcb_thickness + 0.25]);
     }
     }
+}
     
-    if (showpins){
-        mountingPins();
-    }
+
     
-    module mountingPins(){
+    module pin(){
         
                 translate([-(wall_thickness + hole_offset_x), 
                   wall_thickness + hole_offset_y, 
@@ -183,13 +192,7 @@ module Ky040Mount(showpins = true) {
                                   cylinder(h = 1, d = post_outer_diameter);
         }
 
-        translate([-(wall_thickness + pcb_width - hole_offset_x), 
-                  wall_thickness + hole_offset_y, 
-                  -0.5]) {
-            cylinder(h = base_thickness + post_height + 1, d = post_inner_diameter-0.1);
-            cylinder(h = 1, d = post_outer_diameter);
-                      
-        }
+
 }
 
 }
