@@ -95,7 +95,7 @@ module knob() {
     }
 }
 
-module Ky040Mount() {
+module Ky040Mount(showpin = true, showMount = false) {
     // PCB dimensions
     pcb_width = 26.5;
     pcb_depth = 19;
@@ -113,8 +113,18 @@ module Ky040Mount() {
     post_inner_diameter = 2.2; // Slightly smaller than 2.5mm hole for press fit
     
     // Mounting hole positions
-    hole_offset_x = 4;
-    hole_offset_y = 16;
+    hole_offset_x = 4.5;
+    hole_offset_y = 16.5;
+    
+    if (showpin){
+        pin();
+    }
+    
+        if (showMount){
+        mount();
+    }
+    
+    module mount(){
     difference() {
     difference() {
         union() {
@@ -139,6 +149,11 @@ module Ky040Mount() {
                 cylinder(h = post_height, d = post_outer_diameter);
             }
             
+            // Right wall 
+            translate([pcb_width + wall_thickness -1, wall_thickness, 0])
+                color("lightblue", 0.8)
+                cube([wall_thickness + 1, pcb_depth, base_thickness + wall_height]);
+
             
             // Bottom wall (where pins are NOT located)
             translate([0, 0, 0])
@@ -160,14 +175,35 @@ module Ky040Mount() {
                       
         }
     }
-    translate([2, 1, 6]){
-    cube([26.5,26.5,2]);
+    translate([wall_thickness, wall_thickness, base_thickness + post_height]){
+    cube([pcb_width,pcb_depth + 1,pcb_thickness + 0.25]);
     }
     }
 }
+    
+
+    
+    module pin(){
+        
+                translate([-(wall_thickness + hole_offset_x), 
+                  wall_thickness + hole_offset_y, 
+                  -0.5]) {
+            cylinder(h = base_thickness + post_height + 1, d = post_inner_diameter-0.25);
+                                  cylinder(h = 1, d = post_outer_diameter);
+        }
+
+
+}
+
+}
+
 
 // Render the mount
 Ky040Mount();
+
+
+//display mounting pins
+//mountingPins();
 
 // Render the KY-040 module positioned on the mount
 //translate([26.5+2, 20, 6])
