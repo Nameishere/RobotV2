@@ -116,15 +116,7 @@ module Ky040Mount(showpin = true, showMount = false) {
     hole_offset_x = 4.5;
     hole_offset_y = 16.5;
     
-    if (showpin){
-        pin();
-    }
     
-        if (showMount){
-        mount();
-    }
-    
-    module mount(){
     difference() {
     difference() {
         union() {
@@ -180,22 +172,8 @@ module Ky040Mount(showpin = true, showMount = false) {
     }
     }
 }
-    
+   
 
-    
-    module pin(){
-        
-                translate([-(wall_thickness + hole_offset_x), 
-                  wall_thickness + hole_offset_y, 
-                  -0.5]) {
-            cylinder(h = base_thickness + post_height + 1, d = post_inner_diameter-0.25);
-                                  cylinder(h = 1, d = post_outer_diameter);
-        }
-
-
-}
-
-}
 
 
 // Render the mount

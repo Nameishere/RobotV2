@@ -1,5 +1,9 @@
 use <PCBMount.scad>
 
+XYMosMount();
+
+module XYMosMount() {
+
 difference(){
 PCBMount(
     pcb_width = 17,
@@ -19,4 +23,5 @@ translate([-1,25,6]){
     cube([1000,15,1000]);
 };
 
+}
 }
